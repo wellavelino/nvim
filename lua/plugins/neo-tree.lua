@@ -16,10 +16,5 @@ return {
       }
      }
   },
-  config = function()
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
-		vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
-    vim.keymap.set("n", "<C-gs>", ":Neotree float git_status", {})
-    vim.keymap.set('n', '<C-t>', '<Cmd>Neotree toggle<CR>')
-	end,
+
 }

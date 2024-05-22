@@ -1,21 +1,51 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
-vim.opt.backspace = '2'
-vim.opt.showcmd = true
-vim.opt.laststatus = 2
-vim.opt.autowrite = true
-vim.opt.cursorline = true
-vim.opt.autoread = true
+local opt = vim.opt
 
--- use spaces for tabs and whatnot
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.shiftround = true
-vim.opt.expandtab = true
+-- Session Management
+opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
-vim.cmd [[ set noswapfile ]]
-vim.cmd [[ set termguicolors ]]
+-- Line Numbers
+opt.number = true
 
---Line numbers
-vim.wo.number = true
+-- Tabs & Indentation
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.autoindent = true
+vim.bo.softtabstop = 2
+
+-- Line Wrapping
+opt.wrap = false
+
+-- Search Settings
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Cursor Line
+opt.cursorline = true
+
+-- Appearance
+opt.termguicolors = true
+opt.background = "dark"
+opt.signcolumn = "yes"
+vim.diagnostic.config {
+  float = { border = "rounded" }, -- add border to diagnostic popups
+}
+
+-- Backspace
+opt.backspace = "indent,eol,start"
+
+-- Clipboard
+opt.clipboard:append("unnamedplus")
+
+-- Split Windows
+opt.splitright = true
+opt.splitbelow = true
+
+-- Consider - as part of keyword
+opt.iskeyword:append("-")
+
+-- Folding
+opt.foldlevel = 20
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
