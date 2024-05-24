@@ -19,7 +19,6 @@ vim.keymap.set("n", "<leader>sx", ":close<CR>") -- close split window
 vim.keymap.set("n", "<leader>sj", "<C-w>-") -- make split window height shorter
 vim.keymap.set("n", "<leader>sk", "<C-w>+") -- make split windows height taller
 vim.keymap.set("n", "<leader>sl", "<C-w>>5") -- make split windows width bigger 
-vim.keymap.set("n", "<leader>sh", "<C-w><5") -- make split windows width smaller
 
 
 
@@ -28,12 +27,6 @@ vim.keymap.set("n", "<leader>to", ":tabnew<CR>") -- open a new tab
 vim.keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close a tab
 vim.keymap.set("n", "<leader>tn", ":tabn<CR>") -- next tab
 vim.keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
-
-
-
-
-
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
 
 
 -- LSP
@@ -53,11 +46,11 @@ vim.keymap.set('n', '<leader>gp', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', '<leader>gn', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '<leader>tr', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 vim.keymap.set('i', '<C-Space>', '<cmd>lua vim.lsp.buf.completion()<CR>')
-
+ 
 
 -- NEO TREE
-vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
+vim.keymap.set("n", "<C-a>", ":Neotree filesystem reveal left<CR>", {})
 vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
-vim.keymap.set("n", "<C-gs>", ":Neotree float git_status", {})
-vim.keymap.set('n', '<C-t>', '<Cmd>Neotree toggle<CR>')
+vim.keymap.set("n", "<leader-gs>", ":Neotree float git_status", {})
+vim.keymap.set('n', '<C-s>', '<Cmd>Neotree toggle<CR>')
 
