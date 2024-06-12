@@ -13,7 +13,6 @@ return {
 				null_ls.builtins.diagnostics.erb_lint,
 				null_ls.builtins.diagnostics.rubocop,
 				null_ls.builtins.formatting.rubocop,
-        require("none-ls.diagnostics.eslint"),
         null_ls.builtins.completion.luasnip ,
         null_ls.builtins.code_actions.refactoring,
 			},
