@@ -8,3 +8,4 @@ https://github.com/sharkdp/fd?tab=readme-ov-file#installation
 
 Also create a shell to install all brew and move dotfiles to the correct location
 
+add shell for brew setp
