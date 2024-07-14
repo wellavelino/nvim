@@ -2,34 +2,33 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function () 
+    config = function()
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
         ensure_installed = { "c", "lua", "rust", "vim", "html",
           "javascript", "typescript", "tsx", "json", "yaml", "toml",
-          "go", "bash", "css", "scss", "dockerfile", "java", "elixir", "eex","heex"
+          "go", "bash", "css", "scss", "dockerfile", "java", "elixir", "eex", "heex"
         },
         sync_install = false,
         auto_install = true,
         highlight = { enable = true },
-        indent = { enable = true },  
+        indent = { enable = true },
       })
     end
-},
- "nvim-telescope/telescope-ui-select.nvim",
+  },
+  "nvim-telescope/telescope-ui-select.nvim",
   config = function()
-  require("telescope").setup {
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
+    require("telescope").setup {
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {
+          }
+        }
       }
     }
-  }
-}require("telescope").load_extension("ui-select")
- 
+    require("telescope").load_extension("ui-select")
   end
 
 
 }
-

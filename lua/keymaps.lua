@@ -12,6 +12,8 @@ vim.keymap.set("n", "<leader>nn", ":nohlsearch<CR>") -- clear search highlights
 vim.keymap.set("n", "<leader>q", ":q<CR>") -- close buffer
 vim.keymap.set("n", "<leader>Q", ":q!<CR>") -- close buffer without saving
 vim.keymap.set("n", "<leader>W", ":w<CR>") -- save buffer
+vim.keymap.set("n", "<leader>r", [[:%s/<C-r><C-w>//g<Left><Left>]])
+
 
 -- Split window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
@@ -57,3 +59,7 @@ vim.keymap.set("n", "<leader>gs", ":Git<CR>") -- open git status
 vim.keymap.set("n", "<leader>gc", ":Git commit<CR>") -- open git commit
 vim.keymap.set("n", "<leader>lo", ":Git log<CR>") -- open git log
 vim.keymap.set("n", "<leader>ld", ":Gdiffsplit<CR>") -- open git dif
+
+
+-- Float Terminal --
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm direction=float<CR>", {})

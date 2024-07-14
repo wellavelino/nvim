@@ -3,7 +3,16 @@ return {
 		"williamboman/mason.nvim",
 		lazy = false,
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+				opts = { ensure_installed = { "prettier" } },
+			})
 		end,
 	},
 	{
@@ -65,6 +74,12 @@ return {
 
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
+				settings = {
+					format = false,
+					lint = true,
+					lintFiletypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
+					rootPatterns = { ".eslintrc.json", ".eslintrc.js", ".eslintrc", ".eslintignore" },
+				},
 				on_attach = function(client, bufnr)
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
