@@ -36,7 +36,6 @@ return {
 					"pylsp",
 					"rust_analyzer",
 					"lua_ls",
-					"markdown_oxide",
 				},
 			})
 		end,
@@ -111,10 +110,11 @@ return {
 			lspconfig.htmx.setup({
 				capabilities = capabilities,
 			})
-
-			lspconfig.markdown_oxide.setup({
-				capabilities = capabilities,
-			})
 		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		lazy = false, -- This plugin is already lazy
 	},
 }

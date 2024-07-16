@@ -14,7 +14,6 @@ vim.keymap.set("n", "<leader>Q", ":q!<CR>") -- close buffer without saving
 vim.keymap.set("n", "<leader>W", ":w<CR>") -- save buffer
 vim.keymap.set("n", "<leader>r", [[:%s/<C-r><C-w>//g<Left><Left>]])
 
-
 -- Split window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
 vim.keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
@@ -48,7 +47,6 @@ vim.keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 vim.keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
 
 -- NEO TREE
---vim.keymap.set("n", "<C-a>", ":Neotree filesystem reveal left<CR>", {})
 vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
 vim.keymap.set("n", "<leader>gs", "<Cmd>Neotree float git_status<CR>", {})
 vim.keymap.set("n", "<C-a>", ":Neotree toggle<CR>")
@@ -60,6 +58,7 @@ vim.keymap.set("n", "<leader>gc", ":Git commit<CR>") -- open git commit
 vim.keymap.set("n", "<leader>lo", ":Git log<CR>") -- open git log
 vim.keymap.set("n", "<leader>ld", ":Gdiffsplit<CR>") -- open git dif
 
-
 -- Float Terminal --
-vim.keymap.set("n", "<leader>tt", ":ToggleTerm direction=float<CR>", {})
+vim.keymap.set("n", "<leader>tt", ":FloatermNew --name=terminal --height=0.9 --width=0.7 --autoclose=2 fish <CR> ")
+vim.keymap.set("n", "t", ":FloatermToggle terminal<CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q<CR>")

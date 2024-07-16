@@ -1,8 +1,5 @@
 return {
-  {
-    'akinsho/toggleterm.nvim',
-    version = "*",
-    opts = {
-    }
-  }
+	{
+		"voldikss/vim-floaterm",
+	},
 }
