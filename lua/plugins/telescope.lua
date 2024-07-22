@@ -52,6 +52,10 @@ return {
 			require("telescope").extensions.file_browser.file_browser()
 		end)
 
+		vim.keymap.set("n", "<leader>fn", function()
+			builtin.find_files({ cwd = "~/.config/nvim/" })
+		end)
+
 		local telescope = require("telescope")
 		local telescopeConfig = require("telescope.config")
 

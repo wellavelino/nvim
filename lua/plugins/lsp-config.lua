@@ -33,7 +33,6 @@ return {
 					"elixirls",
 					"gopls",
 					"graphql",
-					"pylsp",
 					"rust_analyzer",
 					"lua_ls",
 				},
@@ -96,10 +95,6 @@ return {
 			})
 
 			lspconfig.graphql.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.pylsp.setup({
 				capabilities = capabilities,
 			})
 
