@@ -6,21 +6,38 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				typescript = { { "prettierd", "prettier" } },
-				typescriptreact = { { "prettierd", "prettier" } },
-				javascript = { { "prettierd", "prettier" } },
-				javascriptreact = { { "prettierd", "prettier" } },
+				typescript = { "prettierd", "prettier" },
+				typescriptreact = { "prettierd", "prettier" },
+				javascript = { "prettierd", "prettier" },
+				javascriptreact = { "prettierd", "prettier" },
 				lua = { "stylua" },
 				go = { "gofmt", "goimports " },
 				rust = { "rustfmt" },
-
-				["*"] = { "codespell" },
 			},
-			format_on_save = {
-				lsp_fallback = false,
-				async = false,
-				timeout_ms = 500,
-			},
+			format_on_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				return { timeout_ms = 500, lsp_format = "fallback" }
+			end,
+		})
+		vim.api.nvim_create_user_command("FormatDisable", function(args)
+			if args.bang then
+				-- FormatDisable! will disable formatting just for this buffer
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, {
+			desc = "Disable autoformat-on-save",
+			bang = true,
+		})
+		vim.api.nvim_create_user_command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, {
+			desc = "Re-enable autoformat-on-save",
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
@@ -30,5 +47,7 @@ return {
 				timeout_ms = 500,
 			})
 		end, { desc = "Format file or range (in visual mode)" })
+
+		vim.keymap.set("n", "<leader>df", "<cmd> :FormatDisable<CR>")
 	end,
 }

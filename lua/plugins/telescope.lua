@@ -9,6 +9,7 @@ return {
 		version = "^1.0.0",
 		"aaronhallaert/advanced-git-search.nvim",
 		"nvim-telescope/telescope-file-browser.nvim",
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
@@ -26,6 +27,10 @@ return {
 			{ desc = "Live Grep Code" }
 		)
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
+		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags" })
+		vim.keymap.set("n", "<leader>fr", function()
+			require("telescope.builtin").lsp_references()
+		end, { noremap = true, silent = true })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags" })
 		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find Symbols" })
 		vim.keymap.set("n", "<leader>fi", "<cmd>AdvancedGitSearch<CR>", { desc = "AdvancedGitSearch" })
@@ -55,6 +60,20 @@ return {
 		vim.keymap.set("n", "<leader>fn", function()
 			builtin.find_files({ cwd = "~/.config/nvim/" })
 		end)
+
+		-- obsidian
+		vim.keymap.set("n", "<leader>kj", function()
+			builtin.find_files({ cwd = "~/Code/obsidian/personal/" })
+		end)
+
+		vim.keymap.set("n", "<leader>kl", function()
+			builtin.find_files({ cwd = "~/Code/obsidian/work/" })
+		end)
+
+		-- use this instead of oob VIM
+		vim.keymap.set("n", "<leader>gr", function()
+			require("telescope.builtin").lsp_references()
+		end, { noremap = true, silent = true })
 
 		local telescope = require("telescope")
 		local telescopeConfig = require("telescope.config")
@@ -130,6 +149,8 @@ return {
 
 		require("telescope").load_extension("ui-select")
 		vim.g.zoxide_use_select = true
+		-- Forces all vimselection to be on telescope
+		vim.ui.select = require("telescope.themes").get_dropdown
 
 		require("telescope").load_extension("advanced_git_search")
 

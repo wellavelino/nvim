@@ -8,43 +8,28 @@ function M.config()
 	local everforest = require("everforest")
 	everforest.setup({
 		background = "hard",
-		transparent_background_level = 1,
+		transparent_background_level = 3,
 		italics = true,
 		disable_italic_comments = false,
-		on_highlights = function(hl, _) end,
+		highlight_groups = {
+			-- JavaScript highlights
+			["@variable.javascript"] = { italic = true },
+			["@function.javascript"] = { bold = true },
+			["@punctuation.bracket.javascript"] = { link = "Orange" },
+			["@variable.builtin.javascript"] = { bold = true },
+
+			-- Go (Golang) highlights
+			["@keyword.import.go"] = { link = "Aqua" },
+			["@variable.go"] = { link = "Orange" },
+			["@constant.go"] = { bold = true },
+			["@keyword.go"] = { italic = true },
+			["@type.go"] = { link = "Yellow" },
+			["@type.builtin.go"] = { link = "Yellow" },
+
+			-- You can add more custom highlights here
+		},
 	})
 	everforest.load()
 end
 
 return M
---
--- return {
--- 	{
--- 		"EdenEast/nightfox.nvim",
--- 		lazy = false,
--- 		priority = 1000,
--- 		config = function()
--- 			local palette = require("nightfox.palette").load("terafox")
--- 			require("nightfox").setup({
--- 				options = {
--- 					styles = {
--- 						comments = "italic",
--- 						conditionals = "bold",
--- 						functions = "italic",
--- 						keywords = "bold",
--- 					},
--- 					transparent = true,
--- 				},
--- 				groups = {
--- 					all = {
--- 						TelescopeBorder = { fg = palette.fg3 },
--- 					},
--- 					nightfox = {
--- 						Visual = { bg = palette.bg1 },
--- 					},
--- 				},
--- 			})
--- 			vim.cmd.colorscheme("terafox")
--- 		end,
--- 	},
--- }

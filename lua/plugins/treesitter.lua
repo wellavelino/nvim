@@ -21,6 +21,8 @@ return {
 					"css",
 					"scss",
 					"dockerfile",
+					"markdown",
+					"markdown_inline",
 				},
 				sync_install = false,
 				auto_install = true,
@@ -34,15 +36,15 @@ return {
 			})
 		end,
 	},
-	"nvim-telescope/telescope-ui-select.nvim",
-	config = function()
-		require("telescope").setup({
-			extensions = {
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({}),
-				},
-			},
-		})
-		require("telescope").load_extension("ui-select")
-	end,
+	-- "nvim-telescope/telescope-ui-select.nvim",
+	-- config = function()
+	-- 	require("telescope").setup({
+	-- 		extensions = {
+	-- 			["ui-select"] = {
+	-- 				require("telescope.themes").get_dropdown({}),
+	-- 			},
+	-- 		},
+	-- 	})
+	-- 	require("telescope").load_extension("ui-select")
+	-- end,
 }
