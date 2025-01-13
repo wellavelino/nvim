@@ -21,7 +21,16 @@ return {
 				end
 				return { timeout_ms = 500, lsp_format = "fallback" }
 			end,
+			formatters = {
+				prettierd = {
+					condition = function()
+						return vim.loop.fs_realpath(".prettierrc.js") ~= nil
+							or vim.loop.fs_realpath(".prettierrc.mjs") ~= nil
+					end,
+				},
+			},
 		})
+
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
 				-- FormatDisable! will disable formatting just for this buffer

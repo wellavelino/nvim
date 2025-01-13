@@ -25,14 +25,8 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"htmx",
-					"jsonls",
-					"tsserver",
-					"yamlls",
-					"dockerls",
-					"eslint",
 					"elixirls",
 					"gopls",
-					"graphql",
 					"rust_analyzer",
 					"lua_ls",
 				},
@@ -46,9 +40,6 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
-			lspconfig.tsserver.setup({
-				capabilities = capabilities,
-			})
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 				autostart = true,
@@ -58,34 +49,6 @@ return {
 					},
 				},
 			})
-			lspconfig.jsonls.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.yamlls.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.dockerls.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.eslint.setup({
-				capabilities = capabilities,
-				settings = {
-					format = false,
-					lint = true,
-					lintFiletypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
-					rootPatterns = { ".eslintrc.json", ".eslintrc.js", ".eslintrc", ".eslintignore" },
-				},
-				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
-			})
-
 			lspconfig.elixirls.setup({
 				capabilities = capabilities,
 			})
@@ -93,23 +56,39 @@ return {
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 			})
-
-			lspconfig.graphql.setup({
-				capabilities = capabilities,
-			})
-
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
-
 			lspconfig.htmx.setup({
 				capabilities = capabilities,
 			})
+
+			-- nosure it will work
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+					if client ~= nil and client.supports_method("textDocument/formatting") then
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = args.buf,
+							callback = function()
+								vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+							end,
+						})
+					end
+				end,
+			})
 		end,
 	},
+
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
 		lazy = false, -- This plugin is already lazy
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
 	},
 }

@@ -10,7 +10,7 @@ return {
 	},
 	opts = {
 		options = {
-			theme = "everforest",
+			theme = "codedark",
 		},
 		sections = {
 			lualine_c = {

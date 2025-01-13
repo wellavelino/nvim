@@ -71,10 +71,10 @@ return {
 		end)
 
 		-- use this instead of oob VIM
-		vim.keymap.set("n", "<leader>gr", function()
-			require("telescope.builtin").lsp_references()
-		end, { noremap = true, silent = true })
-
+		-- vim.keymap.set("n", "<leader>gr", function()
+		-- 	require("telescope.builtin").lsp_references()
+		-- end, { noremap = true, silent = true })
+		--
 		local telescope = require("telescope")
 		local telescopeConfig = require("telescope.config")
 
