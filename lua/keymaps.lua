@@ -45,11 +45,6 @@ vim.keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 vim.keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 vim.keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
--- NEO TREE
-vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
-vim.keymap.set("n", "<leader>gs", "<Cmd>Neotree float git_status<CR>", {})
-vim.keymap.set("n", "<C-a>", ":Neotree toggle<CR>")
-vim.keymap.set("n", "<leader>bd", "<Cmd>bd<CR>") --close buffer
 
 -- FUGITIVE
 vim.keymap.set("n", "<leader>gs", ":Git<CR>") -- open git status
@@ -58,9 +53,18 @@ vim.keymap.set("n", "<leader>lo", ":Git log<CR>") -- open git log
 vim.keymap.set("n", "<leader>ld", ":Gdiffsplit<CR>") -- open git dif
 
 -- Float Terminal --
-vim.keymap.set("n", "<leader>tt", ":FloatermNew --name=terminal --height=0.9 --width=0.7 --autoclose=2 fish <CR> ")
-vim.keymap.set("n", "t", ":FloatermToggle terminal<CR>")
+-- vim.keymap.set("n", "<leader>tt", ":ToggleTerm size=100 direction=vertical name=Terminal<CR>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q<CR>")
+-- Easily hit escape in terminal mode.
+
+-- Open a terminal at the bottom of the screen with a fixed height.
+vim.keymap.set("n", "<leader>tt", function()
+	vim.cmd.new()
+	vim.cmd.wincmd("J")
+	vim.api.nvim_win_set_height(0, 12)
+	vim.wo.winfixheight = true
+	vim.cmd.term()
+end)
 
 -- Obsidian
 vim.keymap.set("n", "on", "<cmd>ObsidianNew<CR>")
