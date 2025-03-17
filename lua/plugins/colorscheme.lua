@@ -5,7 +5,7 @@ local specs = {
 			-- Specs allow you to define a value using either a color or template. If the string does
 			-- start with `#` the string will be used as the path of the palette table. Defining just
 			-- a color uses the base version of that color.
-			keyword = "yellow",
+			keyword = "#9c0008", --strong red
 
 			-- Adding either `.bright` will change the value
 			conditional = "magenta.bright",
@@ -18,16 +18,7 @@ local specs = {
 		},
 		git = {
 			-- A color define can also be used
-			changed = "#ffa261",
-		},
-	},
-	github_dark_dimmed = {
-		syntax = {
-			-- As with palettes, a specific style's value will be used over the `all`'s value.
-			operator = "orange",
-			variables = "yellow",
-			string = "green",
-			func = "yellow",
+			changed = "#bcc2cc", -- semi white
 		},
 	},
 }
@@ -41,6 +32,7 @@ return {
 		require("github-theme").setup({
 			options = {
 				transparent = true,
+				dim_inactive = true,
 
 				styles = {
 					comments = "bold,italic", -- Value is any valid attr-list value `:help attr-list`
@@ -48,12 +40,11 @@ return {
 					keywords = "bold",
 					variables = "NONE",
 					types = "italic,bold",
-					strings = "NONE",
+					strings = "italic",
 					constants = "bold",
 				},
 				specs = specs,
 			},
-			-- ...
 		})
 
 		vim.cmd("colorscheme github_dark_dimmed")
