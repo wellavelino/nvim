@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<leader>l>", ":wincmd l<CR>")
 
 -- VIM
-vim.keymap.set("n", "<leader>nn", ":nohlsearch<CR>") -- clear search highlights
+vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>") -- clear search highlights
 vim.keymap.set("n", "<leader>q", ":q<CR>") -- close buffer
 vim.keymap.set("n", "<leader>Q", ":q!<CR>") -- close buffer without saving
 vim.keymap.set("n", "<leader>W", ":w<CR>") -- save buffer
@@ -78,3 +78,7 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- move code up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- git blame
+vim.keymap.set("n", "<leader>br", ":GitBlameOpenCommitURL<CR>")
+vim.keymap.set("n", "<leader>bf", ":GitBlameOpenFileURL<CR>")

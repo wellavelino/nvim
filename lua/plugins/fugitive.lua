@@ -1,6 +1,10 @@
 return {
 	"tpope/vim-fugitive",
 	event = "VeryLazy",
+	dependencies = {
+		"ruifm/gitlinker.nvim",
+	},
+
 	config = function()
 		-- Existing key mappings
 		vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })

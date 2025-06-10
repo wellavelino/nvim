@@ -2,24 +2,25 @@ local specs = {
 	-- As with palettes, the values defined under `all` will be applied to every style.
 	all = {
 		syntax = {
-			-- Specs allow you to define a value using either a color or template. If the string does
-			-- start with `#` the string will be used as the path of the palette table. Defining just
-			-- a color uses the base version of that color.
-			keyword = "#9c0008", --strong red
-
-			-- Adding either `.bright` will change the value
-			conditional = "magenta.bright",
-			number = "orange",
-			func = "yellow",
-			regex = "red",
-			string = "green",
-			builtin0 = "cyan",
-			builtin1 = "white",
+			["keyword.conditional"] = "magenta.bright",
+			["keyword.conditional.ternary"] = "#d670d6", -- Ternary operators specifically
+			["function.builtin"] = "#ff9500", -- Change to your preferred color
+			["function.method"] = "yellow",
+			["variable.builtin"] = { fg = "#8abeb7" }, -- Built-in variables like 'self', 'this'
+			["keyword.function"] = "#9c0008", -- Function definition keywords:with
+			["punctuation.bracket"] = { fg = "#bcc2cc" }, -- Brackets
 		},
 		git = {
 			-- A color define can also be used
 			changed = "#bcc2cc", -- semi white
 		},
+	},
+}
+
+local palettes = {
+	github_dark_dimmed = {
+		-- comment is the definition of the comment color.
+		comment = "#636e7b",
 	},
 }
 
@@ -35,18 +36,20 @@ return {
 				dim_inactive = true,
 
 				styles = {
-					comments = "bold,italic", -- Value is any valid attr-list value `:help attr-list`
-					functions = "italic",
+					comments = "bold", -- Value is any valid attr-list value `:help attr-list`
+					functions = "NONE",
 					keywords = "bold",
 					variables = "NONE",
 					types = "italic,bold",
 					strings = "italic",
 					constants = "bold",
+					operators = "bold",
 				},
 				specs = specs,
+				palettes = palettes,
 			},
 		})
 
-		vim.cmd("colorscheme github_dark_dimmed")
+		vim.cmd.colorscheme({ args = { "github_dark_dimmed" } })
 	end,
 }

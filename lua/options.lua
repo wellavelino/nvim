@@ -7,11 +7,11 @@ opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,te
 opt.number = true
 
 -- Tabs & Indentation
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = false
 opt.autoindent = true
-vim.bo.softtabstop = 2
+opt.softtabstop = 4
 
 -- Line Wrapping
 opt.wrap = false

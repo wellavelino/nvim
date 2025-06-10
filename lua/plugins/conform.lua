@@ -55,7 +55,6 @@ return {
 				rust = { "rustfmt" },
 				json = { "prettierd", "prettier", stop_after_first = true },
 				html = { "prettierd", "prettier", stop_after_first = true },
-				xml = { "xmlformatter" },
 			},
 
 			format_on_save = function(bufnr)
