@@ -52,25 +52,24 @@ vim.keymap.set("n", "<leader>gc", ":Git commit<CR>") -- open git commit
 vim.keymap.set("n", "<leader>lo", ":Git log<CR>") -- open git log
 vim.keymap.set("n", "<leader>ld", ":Gdiffsplit<CR>") -- open git dif
 
--- Float Terminal --
--- vim.keymap.set("n", "<leader>tt", ":ToggleTerm size=100 direction=vertical name=Terminal<CR>")
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q<CR>")
 -- Easily hit escape in terminal mode.
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q<CR>")
+
+-- Float Terminal --
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Toggle terminal",
+})
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<leader>tt", function()
-	vim.cmd.new()
-	vim.cmd.wincmd("J")
-	vim.api.nvim_win_set_height(0, 12)
-	vim.wo.winfixheight = true
-	vim.cmd.term()
-end)
-
--- Obsidian
-vim.keymap.set("n", "on", "<cmd>ObsidianNew<CR>")
-vim.keymap.set("n", "oq", "<cmd>ObsidianQuickSwitch<cr>")
-vim.keymap.set("n", "ot", ":<cmd>ObsidianTomorrow<CR>")
-vim.keymap.set("n", "os", ":<cmd>ObsidianSearch<CR>")
+-- vim.keymap.set("n", "<leader>tt", function()
+-- 	vim.cmd.new()
+-- 	vim.cmd.wincmd("J")
+-- 	vim.api.nvim_win_set_height(0, 12)
+-- 	vim.wo.winfixheight = true
+-- 	vim.cmd.term()
+-- end)
 
 -- Undo
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)

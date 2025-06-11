@@ -1,8 +1,7 @@
 return {
 	"saghen/blink.cmp",
+	version = "1.*",
 	dependencies = { "fang2hou/blink-copilot", "rafamadriz/friendly-snippets" },
-	build = "cargo +nightly build --release",
-
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
@@ -12,7 +11,7 @@ return {
 		},
 
 		completion = {
-			documentation = { auto_show = true, auto_show_delay_ms = 200 },
+			documentation = { auto_show = true, auto_show_delay_ms = 100 },
 		},
 
 		signature = { enabled = true },
