@@ -2,10 +2,10 @@
 vim.g.mapleader = " "
 
 -- Navigate vim panes better
-vim.keymap.set("n", "<leader>k>", ":wincmd k<CR>")
-vim.keymap.set("n", "<leader>j>", ":wincmd j<CR>")
-vim.keymap.set("n", "<leader>h>", ":wincmd h<CR>")
-vim.keymap.set("n", "<leader>l>", ":wincmd l<CR>")
+vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
+vim.keymap.set("n", "<leader>j", ":wincmd j<CR>")
+vim.keymap.set("n", "<leader>h", ":wincmd h<CR>")
+vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 -- VIM
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>") -- clear search highlights
@@ -44,7 +44,6 @@ vim.keymap.set("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>")
 vim.keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 vim.keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-vim.keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
 
 -- FUGITIVE
 vim.keymap.set("n", "<leader>gs", ":Git<CR>") -- open git status

@@ -31,12 +31,11 @@ return {
 		vim.keymap.set("n", "<leader>fr", function()
 			require("telescope.builtin").lsp_references()
 		end, { noremap = true, silent = true })
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags" })
 		vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find Symbols" })
 		vim.keymap.set("n", "<leader>fi", "<cmd>AdvancedGitSearch<CR>", { desc = "AdvancedGitSearch" })
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find Old Files" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under Cursor" })
-		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search Git Commits" })
+		vim.keymap.set("n", "<leader>gC", builtin.git_commits, { desc = "Search Git Commits" })
 		vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
 		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find Keymaps" })
 		vim.keymap.set("n", "<leader>/", function()
@@ -69,11 +68,6 @@ return {
 		vim.keymap.set("n", "<leader>kl", function()
 			builtin.find_files({ cwd = "~/Code/obsidian/work/" })
 		end)
-
-		-- use this instead of oob VIM
-		vim.keymap.set("n", "<leader>aa", function()
-			require("telescope.builtin").lsp_references()
-		end, { noremap = true, silent = true })
 
 		local telescope = require("telescope")
 		local telescopeConfig = require("telescope.config")

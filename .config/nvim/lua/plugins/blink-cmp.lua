@@ -17,7 +17,7 @@ return {
 		signature = { enabled = true },
 
 		sources = {
-			default = { "copilot", "lsp", "path", "snippets", "buffer", "codecompanion" },
+			default = { "copilot", "lsp", "path", "snippets", "buffer" },
 			providers = {
 				copilot = {
 					name = "copilot",

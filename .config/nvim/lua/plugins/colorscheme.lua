@@ -4,10 +4,10 @@ local specs = {
 		syntax = {
 			["keyword.conditional"] = "magenta.bright",
 			["keyword.conditional.ternary"] = "#d670d6", -- Ternary operators specifically
-			["function.builtin"] = "#ff9500", -- Change to your preferred color
+			["function.builtin"] = "#ff9500",    -- Change to your preferred color
 			["function.method"] = "yellow",
 			["variable.builtin"] = { fg = "#8abeb7" }, -- Built-in variables like 'self', 'this'
-			["keyword.function"] = "#9c0008", -- Function definition keywords:with
+			["keyword.function"] = "#9c0008",    -- Function definition keywords:with
 			["punctuation.bracket"] = { fg = "#bcc2cc" }, -- Brackets
 		},
 		git = {
@@ -41,7 +41,7 @@ return {
 					keywords = "bold",
 					variables = "NONE",
 					types = "italic,bold",
-					strings = "italic",
+					strings = "NONE",
 					constants = "bold",
 					operators = "bold",
 				},

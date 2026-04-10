@@ -34,7 +34,7 @@ return {
 					-- nvim_buf_get_lines uses zero-based indexing -> subtract from last
 					local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
 					local range = { start = { start, 0 }, ["end"] = { last - 1, last_hunk_line:len() } }
-					format({ range = range, async = true, lsp_fallback = true }, function()
+					format({ range = range, async = true, lsp_format = "fallback" }, function()
 						vim.defer_fn(function()
 							format_range()
 						end, 1)
@@ -50,11 +50,15 @@ return {
 			formatters_by_ft = {
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
+				css = { "prettierd", "prettier", stop_after_first = true },
+				scss = { "prettierd", "prettier", stop_after_first = true },
+				tsx = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
-				go = { "gofmt", "goimports " },
+				go = { "gofmt", "goimports" },
 				rust = { "rustfmt" },
 				json = { "prettierd", "prettier", stop_after_first = true },
 				html = { "prettierd", "prettier", stop_after_first = true },
+				xml = { "xmlformatter", stop_after_first = true },
 			},
 
 			format_on_save = function(bufnr)
@@ -64,7 +68,7 @@ return {
 				local disable_filetypes = { js = false }
 				return {
 					timeout_ms = 500,
-					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+					lsp_format = disable_filetypes[vim.bo[bufnr].filetype] and "never" or "fallback",
 				}
 			end,
 			-- format_on_save = function()
@@ -101,7 +105,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 500,
 			})

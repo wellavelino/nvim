@@ -27,10 +27,6 @@ opt.cursorline = true
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
-vim.diagnostic.config({
-	float = { border = "rounded" }, -- add border to diagnostic popups
-})
-
 -- Backspace
 opt.backspace = "indent,eol,start"
 
@@ -47,7 +43,7 @@ opt.iskeyword:append("-")
 -- Folding
 opt.foldlevel = 20
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Utilize Treesitter folds (native Neovim 0.10+)
 
 -- for Obsidian
 opt.conceallevel = 1

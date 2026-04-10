@@ -26,7 +26,7 @@ return {
 				ensure_installed = {
 					"gopls",
 					"lua_ls",
-					"eslint",
+					-- "eslint",
 				},
 			})
 		end,
@@ -39,64 +39,57 @@ return {
 		lazy = false,
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			local lsp_utils = require("config.lsp")
 
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				autostart = true,
+				on_attach = lsp_utils.on_attach,
 				settings = {
 					Lua = {
 						diagnostics = { globals = { "vim" } },
 					},
 				},
 			})
-			lspconfig.gopls.setup({
+
+			-- Setup Go LSP
+			vim.lsp.config("gopls", {
 				capabilities = capabilities,
+				autostart = true,
+				on_attach = lsp_utils.on_attach,
 			})
 
-			lspconfig.eslint.setup({
-				capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					-- Enable diagnostics for the buffer
-					vim.diagnostic.enable(bufnr)
-
-					-- Configure diagnostic display
-					vim.diagnostic.config({
-						virtual_text = true,
-						signs = true,
-						underline = true,
-						update_in_insert = false,
-						severity_sort = true,
-					})
-				end,
-				settings = {
-					eslint = {
-						enable = true,
-						run = "onType", -- Run ESLint on every keystroke
-						-- This won't override your .eslintrc.js settings, but adds additional configuration
-						-- Note: The actual rules should be defined in your project's .eslintrc.js
-						useESLintClass = true,
-						codeAction = {
-							disableRuleComment = {
-								enable = true,
-								location = "separateLine",
-							},
-							showDocumentation = {
-								enable = true,
-							},
-						},
-						codeActionOnSave = {
-							enable = false, -- Don't auto-fix on save
-							mode = "problems",
-						},
-						format = false, -- Don't use ESLint for formatting
-						nodePath = "", -- Use this if your ESLint is installed in a non-standard location
-						workingDirectory = { mode = "location" },
-					},
-				},
-			})
+			-- To migrate ESLint, uncomment and use:
+			-- vim.lsp.config("eslint", {
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	settings = {
+			-- 		eslint = {
+			-- 			enable = true,
+			-- 			run = "onType",
+			-- 			useESLintClass = true,
+			-- 			codeAction = {
+			-- 				disableRuleComment = {
+			-- 					enable = true,
+			-- 					location = "separateLine",
+			-- 				},
+			-- 				showDocumentation = {
+			-- 					enable = true,
+			-- 				},
+			-- 			},
+			-- 			codeActionOnSave = {
+			-- 				enable = false,
+			-- 				mode = "problems",
+			-- 			},
+			-- 			format = false,
+			-- 			nodePath = "",
+			-- 			workingDirectory = { mode = "location" },
+			-- 		},
+			-- 	},
+			-- })
 		end,
 	},
+
 
 	{
 		"mrcjkb/rustaceanvim",
@@ -113,13 +106,31 @@ return {
 				tsserver_plugins = {},
 
 				-- https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3439
+				-- tsserver_file_preferences = {
+				-- 	includeInlayParameterNameHints = "literals", -- Show parameter name hints (all, literals, none)
+				-- 	includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				-- 	includeInlayVariableTypeHints = true, -- Show variable type hints
+				-- 	includeInlayPropertyDeclarationTypeHints = true, -- Show property declaration type hints
+				-- 	includeInlayFunctionLikeReturnTypeHints = false, -- Show return type hints
+				-- 	includeInlayEnumMemberValueHints = false, -- Show enum value hints
+				-- },
+				--
 				tsserver_file_preferences = {
-					includeInlayParameterNameHints = "literals", -- Show parameter name hints (all, literals, none)
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayVariableTypeHints = true, -- Show variable type hints
-					includeInlayPropertyDeclarationTypeHints = true, -- Show property declaration type hints
-					includeInlayFunctionLikeReturnTypeHints = false, -- Show return type hints
-					includeInlayEnumMemberValueHints = false, -- Show enum value hints
+					-- Show parameter names for literal arguments (like strings, numbers, booleans).
+					-- This is the most useful hint, clarifying calls like `doSomething(true, false)`.
+					includeInlayParameterNameHints = "literals",
+
+					-- Don't show the parameter name if your variable name already matches.
+					-- This reduces noise, e.g., in `login(user, user)`.
+					includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+
+					-- Show the inferred type for variables. This can be very helpful but is
+					-- a matter of personal taste. Set to `false` if you find it too noisy.
+					includeInlayVariableTypeHints = true,
+
+					-- The following hints are often less critical and can create more clutter.
+					includeInlayPropertyDeclarationTypeHints = false,
+					includeInlayFunctionLikeReturnTypeHints = false,
 				},
 
 				-- Enable strict checking in the compiler options
@@ -153,34 +164,8 @@ return {
 				end,
 			},
 
-			-- Custom on_attach function to enable additional features
 			on_attach = function(client, bufnr)
-				-- Enable inlay hints if available
-				if client.server_capabilities.inlayHintProvider then
-					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-				end
-
-				-- Set up diagnostics configuration for better visibility
-				vim.diagnostic.config({
-					virtual_text = {
-						prefix = "●", -- Use a dot as prefix for virtual text
-						source = "if_many",
-					},
-					float = {
-						source = "always",
-						border = "rounded",
-					},
-					signs = true,
-					underline = true,
-					update_in_insert = false,
-					severity_sort = true,
-				})
-
-				-- Optional: Set up signs for different diagnostic levels
-				vim.fn.sign_define("DiagnosticSignError", { text = "✗", texthl = "DiagnosticSignError" })
-				vim.fn.sign_define("DiagnosticSignWarn", { text = "⚠", texthl = "DiagnosticSignWarn" })
-				vim.fn.sign_define("DiagnosticSignInfo", { text = "ℹ", texthl = "DiagnosticSignInfo" })
-				vim.fn.sign_define("DiagnosticSignHint", { text = "➤", texthl = "DiagnosticSignHint" })
+				require("config.lsp").on_attach(client, bufnr)
 			end,
 		},
 	},

@@ -4,11 +4,10 @@ return {
 	event = "InsertEnter",
 	config = function()
 		require("copilot").setup({
-			-- Your existing model setting
-			copilot_model = "gpt-4o-copilot",
+			copilot_model = "gpt-5-copilot",
+			auth_provider_url = "https://code.devsnc.com",
 		})
 
-		-- --- Set the suggestion color (as before) ---
 		vim.api.nvim_set_hl(0, "CopilotSuggestion", {
 			fg = "#FFFFFF",
 			bold = true,
