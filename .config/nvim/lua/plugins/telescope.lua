@@ -69,6 +69,12 @@ return {
 			builtin.find_files({ cwd = "~/Code/obsidian/work/" })
 		end)
 
+		-- use this instead of oob VIM
+		vim.keymap.set("n", "<leader>aa", function()
+			require("telescope.builtin").lsp_references()
+		end, { noremap = true, silent = true })
+
+
 		local telescope = require("telescope")
 		local telescopeConfig = require("telescope.config")
 
