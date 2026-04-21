@@ -1,34 +1,44 @@
 local specs = {
-	-- As with palettes, the values defined under `all` will be applied to every style.
 	all = {
 		syntax = {
-			["keyword.conditional"] = "magenta.bright",
-			["keyword.conditional.ternary"] = "#d670d6", -- Ternary operators specifically
-			["function.builtin"] = "#ff9500",    -- Change to your preferred color
-			["function.method"] = "yellow",
-			["variable.builtin"] = { fg = "#8abeb7" }, -- Built-in variables like 'self', 'this'
-			["keyword.function"] = "#9c0008",    -- Function definition keywords:with
-			["punctuation.bracket"] = { fg = "#bcc2cc" }, -- Brackets
+			-- Valid spec.syntax keys: bracket, builtin0, builtin1, builtin2, comment,
+			-- conditional, const, dep, field, func, ident, keyword, number, operator,
+			-- param, preproc, regex, statement, string, type, tag, variable
+			conditional = "#b083f0",  -- purple/magenta bright
+			builtin0 = "#ff9500",
+			bracket = "#bcc2cc",
+			keyword = "#9c0008",
 		},
 		git = {
-			-- A color define can also be used
-			changed = "#bcc2cc", -- semi white
+			changed = "#bcc2cc",
 		},
 	},
 }
 
 local palettes = {
 	github_dark_dimmed = {
-		-- comment is the definition of the comment color.
 		comment = "#636e7b",
+	},
+}
+
+-- Treesitter highlight group overrides go here (not in specs)
+local groups = {
+	all = {
+		["@keyword.conditional"] = { fg = "palette.magenta.bright" },
+		["@keyword.conditional.ternary"] = { fg = "#d670d6" },
+		["@function.builtin"] = { fg = "#ff9500" },
+		["@function.method"] = { fg = "palette.yellow" },
+		["@variable.builtin"] = { fg = "#8abeb7" },
+		["@keyword.function"] = { fg = "#9c0008" },
+		["@punctuation.bracket"] = { fg = "#bcc2cc" },
 	},
 }
 
 return {
 	"projekt0n/github-nvim-theme",
 	name = "github-theme",
-	lazy = false, -- make sure we load this during startup if it is your main colorscheme
-	priority = 2000, -- make sure to load this before all the other start plugins
+	lazy = false,
+	priority = 2000,
 	config = function()
 		require("github-theme").setup({
 			options = {
@@ -36,7 +46,7 @@ return {
 				dim_inactive = true,
 
 				styles = {
-					comments = "bold", -- Value is any valid attr-list value `:help attr-list`
+					comments = "bold",
 					functions = "NONE",
 					keywords = "bold",
 					variables = "NONE",
@@ -45,9 +55,10 @@ return {
 					constants = "bold",
 					operators = "bold",
 				},
-				specs = specs,
-				palettes = palettes,
 			},
+			specs = specs,
+			palettes = palettes,
+			groups = groups,
 		})
 
 		vim.cmd.colorscheme({ args = { "github_dark_dimmed" } })
